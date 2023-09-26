@@ -25,6 +25,7 @@ from langchain.evaluation.string_distance.base import (
     StringDistanceEvalChain,
 )
 from langchain.schema.language_model import BaseLanguageModel
+from langchain.evaluation.scoring.eval_chain import LabeledScoringStringEvalChain, ScoreStringEvalChain
 
 
 def load_dataset(uri: str) -> List[Dict]:
@@ -68,7 +69,9 @@ _EVALUATOR_MAP: Dict[
     EvaluatorType.COT_QA: CotQAEvalChain,
     EvaluatorType.CONTEXT_QA: ContextQAEvalChain,
     EvaluatorType.PAIRWISE_STRING: PairwiseStringEvalChain,
+    EvaluatorType.SCORED_STRING: ScoreStringEvalChain,
     EvaluatorType.LABELED_PAIRWISE_STRING: LabeledPairwiseStringEvalChain,
+    EvaluatorType.LABELED_SCORED_STRING: LabeledScoringStringEvalChain,
     EvaluatorType.AGENT_TRAJECTORY: TrajectoryEvalChain,
     EvaluatorType.CRITERIA: CriteriaEvalChain,
     EvaluatorType.LABELED_CRITERIA: LabeledCriteriaEvalChain,
