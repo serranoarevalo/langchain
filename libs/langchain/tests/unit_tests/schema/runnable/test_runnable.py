@@ -2,7 +2,6 @@ import sys
 from operator import itemgetter
 from typing import Any, Dict, List, Optional, Sequence, Union, cast
 from uuid import UUID
-from langchain.tools.base import BaseTool, tool
 
 import pytest
 from freezegun import freeze_time
@@ -47,6 +46,7 @@ from langchain.schema.runnable import (
     RunnableSequence,
     RunnableWithFallbacks,
 )
+from langchain.tools.base import BaseTool, tool
 from langchain.tools.json.tool import JsonListKeysTool, JsonSpec
 
 
@@ -2740,6 +2740,7 @@ async def test_runnable_branch_abatch() -> None:
     )
 
     assert await branch.abatch([1, 10, 0]) == [2, 100, -1]
+
 
 @pytest.mark.asyncio
 async def test_tool_from_runnable() -> None:
