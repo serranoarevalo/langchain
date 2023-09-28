@@ -2741,8 +2741,8 @@ async def test_runnable_branch_abatch() -> None:
 
     assert await branch.abatch([1, 10, 0]) == [2, 100, -1]
 
-
-def test_tool_from_runnable() -> None:
+@pytest.mark.asyncio
+async def test_tool_from_runnable() -> None:
     prompt = (
         SystemMessagePromptTemplate.from_template("You are a nice assistant.")
         + "{question}"
@@ -2755,6 +2755,12 @@ def test_tool_from_runnable() -> None:
 
     assert isinstance(chain_tool, BaseTool)
     assert chain_tool.name == "chain_tool"
+    assert chain_tool.run({"question": "What up"}) == chain.invoke(
+        {"question": "What up"}
+    )
+    assert await chain_tool.arun({"question": "What up"}) == await chain.ainvoke(
+        {"question": "What up"}
+    )
     assert chain_tool.description.endswith(repr(chain))
     assert chain_tool.args_schema.schema() == chain.input_schema.schema()
     assert chain_tool.args_schema.schema() == {
